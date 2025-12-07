@@ -185,78 +185,126 @@
         </div>
     </section>
 
-    <!-- Scripts -->
-    <script>
+            <!-- Dots Container -->
+            <div class="carousel-dots" id="carouselDots"></div>
+
+            <script>
         document.addEventListener('DOMContentLoaded', () => {
             const track = document.getElementById('productTrack');
             const prevBtn = document.getElementById('prevBtn');
             const nextBtn = document.getElementById('nextBtn');
+            const dotsContainer = document.getElementById('carouselDots');
             
             // Clone items for infinite effect
             const originalItems = Array.from(track.children);
+            const itemsPerSlide = 4;
+            const totalOriginalSlides = Math.ceil(originalItems.length / itemsPerSlide);
+
             originalItems.forEach(item => {
                 const clone = item.cloneNode(true);
                 track.appendChild(clone);
             });
 
-            let scrollAmount = 0;
-            let scrollSpeed = 1; // Adjust speed (pixels per frame)
-            let isPaused = false;
+            // Auto-Scroll "4 by 4" (Page Interval)
             let scrollInterval;
+            const autoScrollDelay = 2500; 
 
-            const startAutoScroll = () => {
-                const scroll = () => {
-                    if (!isPaused) {
-                        track.scrollLeft += scrollSpeed;
-                        // Reset when we reach the start of the cloned set
-                        // The original set width is approximately half the total scrollWidth
-                        if (track.scrollLeft >= track.scrollWidth / 2) {
-                            track.scrollLeft = 0;
-                        }
-                    }
-                    scrollInterval = requestAnimationFrame(scroll);
-                };
-                scrollInterval = requestAnimationFrame(scroll);
+            // Initialize Dots
+            const updateDots = (activeIndex) => {
+                dotsContainer.innerHTML = '';
+                for (let i = 0; i < totalOriginalSlides; i++) {
+                    const dot = document.createElement('div');
+                    dot.classList.add('dot');
+                    if (i === activeIndex) dot.classList.add('active');
+                    dot.addEventListener('click', () => {
+                        stopAutoSlide();
+                        scrollToSlide(i);
+                    });
+                    dotsContainer.appendChild(dot);
+                }
             };
 
-            // Start auto-scroll
-            startAutoScroll();
+            const scrollToSlide = (index) => {
+                const viewWidth = track.clientWidth;
+                track.scrollLeft = index * viewWidth;
+                updateDots(index);
+                // Restart timer?
+                startAutoSlide(); // resume
+            };
+
+            const moveNext = () => {
+                const viewWidth = track.clientWidth;
+                
+                // Check wrap
+                if (track.scrollLeft >= (track.scrollWidth / 2)) {
+                     track.style.scrollBehavior = 'auto';
+                     track.scrollLeft = 0;
+                     track.style.scrollBehavior = 'smooth'; 
+                }
+
+                track.scrollBy({ left: viewWidth, behavior: 'smooth' });
+                
+                // Update dots based on predicted new position
+                // Small delay to let scroll start? Or calculate target.
+                // Logic: (Current + 1) % Total
+                // Actually, best to read scroll position after transition, but for responsiveness:
+                const nextIndex = Math.round((track.scrollLeft + viewWidth) / viewWidth) % totalOriginalSlides;
+                updateDots(nextIndex);
+            };
+
+            const startAutoSlide = () => {
+                stopAutoSlide(); 
+                scrollInterval = setInterval(moveNext, autoScrollDelay);
+            };
+
+            const stopAutoSlide = () => {
+                clearInterval(scrollInterval);
+            };
+
+            // Initial Setup
+            updateDots(0);
+            startAutoSlide();
 
             // Pause on hover
-            track.addEventListener('mouseenter', () => {
-                isPaused = true;
-            });
+            track.addEventListener('mouseenter', stopAutoSlide);
+            track.addEventListener('mouseleave', startAutoSlide);
 
-            track.addEventListener('mouseleave', () => {
-                isPaused = false;
-            });
-
-            // Manual Navigation with Conflict Resolution
-            const getScrollAmount = () => {
-                // Scroll roughly one card width
-                const card = track.querySelector('.product-card');
-                return card ? card.offsetWidth + 30 : 300; 
-            };
-
+            // Manual Arrows
             nextBtn.addEventListener('click', () => {
-                isPaused = true; // Pause to prevent conflict
-                setTimeout(() => isPaused = false, 1000); // Resume after interaction
-                track.scrollBy({ left: getScrollAmount(), behavior: 'smooth' });
+                stopAutoSlide();
+                moveNext(); 
             });
 
             prevBtn.addEventListener('click', () => {
-                isPaused = true;
-                setTimeout(() => isPaused = false, 1000);
-                
-                // Wrap-around logic for infinite feel
+                stopAutoSlide();
+                const viewWidth = track.clientWidth;
+
                 if (track.scrollLeft <= 10) {
-                     // If at start, jump to middle (which is identical content)
-                     track.style.scrollBehavior = 'auto'; // Disable smooth for instant jump
+                     track.style.scrollBehavior = 'auto';
                      track.scrollLeft = track.scrollWidth / 2;
-                     track.style.scrollBehavior = 'smooth'; // Re-enable
+                     track.style.scrollBehavior = 'smooth'; 
                 }
+
+                track.scrollBy({ left: -viewWidth, behavior: 'smooth' });
+
+                // Update dots (Previous logic)
+                // Current theoretical index
+                let currentScroll = track.scrollLeft;
+                if (currentScroll <= 10) currentScroll = track.scrollWidth / 2; // Treat as wrapped range
                 
-                track.scrollBy({ left: -getScrollAmount(), behavior: 'smooth' });
+                const prevTarget = currentScroll - viewWidth;
+                const prevIndex = Math.round(prevTarget / viewWidth) % totalOriginalSlides;
+                updateDots(prevIndex);
+            });
+            
+            // Sync dots on manual scroll (swipe/touch) - Optional usage of scroll listener
+            track.addEventListener('scroll', () => {
+                 // Debounce?
+                 // Simple check: which slide is mostly visible?
+                 // const index = Math.round(track.scrollLeft / track.clientWidth) % totalOriginalSlides;
+                 // updateDots(index); 
+                 // Note: enabling this might fight with click updates if not careful. 
+                 // Keeping it manual update for now as requested by interaction.
             });
         });
     </script>

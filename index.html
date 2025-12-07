@@ -192,17 +192,71 @@
             const prevBtn = document.getElementById('prevBtn');
             const nextBtn = document.getElementById('nextBtn');
             
-            // Scroll by one view width (approx 4 items)
+            // Clone items for infinite effect
+            const originalItems = Array.from(track.children);
+            originalItems.forEach(item => {
+                const clone = item.cloneNode(true);
+                track.appendChild(clone);
+            });
+
+            let scrollAmount = 0;
+            let scrollSpeed = 1; // Adjust speed (pixels per frame)
+            let isPaused = false;
+            let scrollInterval;
+
+            const startAutoScroll = () => {
+                const scroll = () => {
+                    if (!isPaused) {
+                        track.scrollLeft += scrollSpeed;
+                        // Reset when we reach the start of the cloned set
+                        // The original set width is approximately half the total scrollWidth
+                        if (track.scrollLeft >= track.scrollWidth / 2) {
+                            track.scrollLeft = 0;
+                        }
+                    }
+                    scrollInterval = requestAnimationFrame(scroll);
+                };
+                scrollInterval = requestAnimationFrame(scroll);
+            };
+
+            // Start auto-scroll
+            startAutoScroll();
+
+            // Pause on hover
+            track.addEventListener('mouseenter', () => {
+                isPaused = true;
+            });
+
+            track.addEventListener('mouseleave', () => {
+                isPaused = false;
+            });
+
+            // Manual Navigation with Conflict Resolution
             const getScrollAmount = () => {
-                return track.clientWidth;
+                // Scroll roughly one card width
+                const card = track.querySelector('.product-card');
+                return card ? card.offsetWidth + 30 : 300; 
             };
 
             nextBtn.addEventListener('click', () => {
-                track.scrollBy({ left: getScrollAmount() / 2, behavior: 'smooth' }); // Scroll half view for smoother browsing
+                isPaused = true; // Pause to prevent conflict
+                setTimeout(() => isPaused = false, 1000); // Resume after interaction
+                track.scrollBy({ left: getScrollAmount(), behavior: 'smooth' });
             });
 
             prevBtn.addEventListener('click', () => {
-                track.scrollBy({ left: -getScrollAmount() / 2, behavior: 'smooth' });
+                isPaused = true;
+                setTimeout(() => isPaused = false, 1000);
+                
+                // Wrap-around logic for infinite feel
+                if (track.scrollLeft <= 10) {
+                     // If at start, jump to middle (which is identical content)
+                     track.style.scrollBehavior = 'auto'; // Disable smooth for instant jump
+                     track.scrollLeft = track.scrollWidth / 2;
+                     track.style.scrollBehavior = 'smooth'; // Re-enable
+                }
+                
+                track.scrollBy({ left: -getScrollAmount(), behavior: 'smooth' });
             });
         });
     </script>

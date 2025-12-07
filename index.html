@@ -1,0 +1,296 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NutraSoft | Natural Skin & Body Care</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+    <!-- FontAwesome for Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+
+    <!-- Announcement Bar -->
+    <div class="announcement-bar">
+        Free Shipping on Orders Over 500 EGP
+    </div>
+
+    <!-- Header -->
+    <header class="header">
+        <div class="container header-container">
+            <button class="mobile-menu-btn" aria-label="Menu">
+                <i class="fas fa-bars"></i>
+            </button>
+            
+            <a href="#" class="logo">
+                <img src="https://nutraprofessional.com/cdn/shop/files/Black_and_Red_Modern_Bold_sale_Instagram_Story.png?v=1746407194&width=600" alt="NutraSoft Logo" class="logo-img">
+            </a>
+
+            <nav class="desktop-nav">
+                <ul>
+                    <li><a href="#" class="active">Home</a></li>
+                    <li><a href="#">Skin Care</a></li>
+                    <li><a href="#">Hair Care</a></li>
+                    <li><a href="#">Body Care</a></li>
+                    <li><a href="#">Bundles</a></li>
+                </ul>
+            </nav>
+
+            <div class="header-icons">
+                <a href="#" aria-label="Search"><i class="fas fa-search"></i></a>
+                <a href="#" aria-label="Account"><i class="far fa-user"></i></a>
+                <a href="#" aria-label="Cart" class="cart-icon">
+                    <i class="fas fa-shopping-bag"></i>
+                    <span class="cart-count">0</span>
+                </a>
+            </div>
+        </div>
+    </header>
+
+    <!-- Hero Section (User Provided Image) -->
+    <section class="hero" style="background-image: url('https://nutraprofessional.com/cdn/shop/files/nutrasoftcover.webp?v=1746409165&width=3840');">
+        <!-- Overlay removed/adjusted as requested -->
+        <div class="hero-overlay" style="background: linear-gradient(to bottom, rgba(0,0,0,0), rgba(0,0,0,0.2));"></div>
+        <div class="hero-content container">
+            <!-- Content kept minimal to show off the image -->
+            <h1 class="hero-title">Discover The Power Of Nature</h1>
+            <div class="hero-buttons">
+                <a href="#" class="btn btn-primary">Shop Now</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Trust Badges (New Recommendation) -->
+    <section class="trust-badges">
+        <div class="container trust-grid">
+            <div class="trust-item">
+                <i class="fas fa-leaf"></i>
+                <span>Natural Ingredients</span>
+            </div>
+            <div class="trust-item">
+                <i class="fas fa-flask"></i>
+                <span>Lab Tested</span>
+            </div>
+            <div class="trust-item">
+                <i class="fas fa-paw"></i>
+                <span>Cruelty Free</span>
+            </div>
+        </div>
+    </section>
+
+    <!-- Best Sellers -->
+    <section class="section best-sellers">
+        <div class="container">
+            <h2 class="section-title">Best Sellers</h2>
+            
+            <div class="carousel-container">
+                <button class="carousel-btn prev-btn" id="prevBtn"><i class="fas fa-chevron-left"></i></button>
+                
+                <div class="product-grid" id="productTrack">
+                    <!-- Product 1 -->
+                    <div class="product-card">
+                        <div class="product-image">
+                            <img src="images/product-1.png" alt="Oily Makeup Remover">
+                        </div>
+                        <div class="product-info">
+                            <h3 class="product-title">Oily Makeup Remover</h3>
+                            <div class="product-price">210.00 EGP</div>
+                            <button class="btn-add">Add to cart</button>
+                        </div>
+                    </div>
+                    <!-- Product 2 -->
+                    <div class="product-card">
+                        <div class="product-image">
+                            <img src="images/product-2.png" alt="Deep Warm Nights Body Splash">
+                        </div>
+                        <div class="product-info">
+                            <h3 class="product-title">Deep Warm Nights - Splash</h3>
+                            <div class="product-price">180.00 EGP</div>
+                            <button class="btn-add">Add to cart</button>
+                        </div>
+                    </div>
+                    <!-- Product 3 -->
+                    <div class="product-card">
+                        <div class="product-image">
+                            <img src="images/product-3.png" alt="Si Dreams Splash">
+                        </div>
+                        <div class="product-info">
+                            <h3 class="product-title">Si Dreams - Body Splash</h3>
+                            <div class="product-price">180.00 EGP</div>
+                            <button class="btn-add">Add to cart</button>
+                        </div>
+                    </div>
+                    <!-- Product 4 -->
+                    <div class="product-card">
+                        <div class="product-image">
+                            <img src="images/product-4.png" alt="Body Lotion">
+                        </div>
+                        <div class="product-info">
+                            <h3 class="product-title">Si Dreams - Body Lotion</h3>
+                            <div class="product-price">150.00 EGP</div>
+                            <button class="btn-add">Add to cart</button>
+                        </div>
+                    </div>
+                    <!-- Product 5 (New) -->
+                    <div class="product-card">
+                        <div class="product-image">
+                            <img src="images/product-5.png" alt="Exfoliating Gel">
+                        </div>
+                        <div class="product-info">
+                            <h3 class="product-title">Exfoliating Gel</h3>
+                            <div class="product-price">400.00 EGP</div>
+                            <button class="btn-add">Add to cart</button>
+                        </div>
+                    </div>
+                    <!-- Product 6 (New) -->
+                    <div class="product-card">
+                        <div class="product-image">
+                            <img src="images/product-6.png" alt="Blue Breeze Splash">
+                        </div>
+                        <div class="product-info">
+                            <h3 class="product-title">Blue Breeze – Body Splash</h3>
+                            <div class="product-price">180.00 EGP</div>
+                            <button class="btn-add">Add to cart</button>
+                        </div>
+                    </div>
+                    <!-- Product 7 (New) -->
+                    <div class="product-card">
+                        <div class="product-image">
+                            <img src="images/product-7.png" alt="Ocean Green Splash">
+                        </div>
+                        <div class="product-info">
+                            <h3 class="product-title">Ocean Green – Body Splash</h3>
+                            <div class="product-price">180.00 EGP</div>
+                            <button class="btn-add">Add to cart</button>
+                        </div>
+                    </div>
+                    <!-- Product 8 (New) -->
+                    <div class="product-card">
+                        <div class="product-image">
+                            <img src="images/product-8.png" alt="Papaya Soap">
+                        </div>
+                        <div class="product-info">
+                            <h3 class="product-title">Papaya & Licorice soap</h3>
+                            <div class="product-price">50.00 EGP</div>
+                            <button class="btn-add">Add to cart</button>
+                        </div>
+                    </div>
+                </div>
+
+                <button class="carousel-btn next-btn" id="nextBtn"><i class="fas fa-chevron-right"></i></button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Scripts -->
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const track = document.getElementById('productTrack');
+            const prevBtn = document.getElementById('prevBtn');
+            const nextBtn = document.getElementById('nextBtn');
+            
+            // Scroll by one view width (approx 4 items)
+            const getScrollAmount = () => {
+                return track.clientWidth;
+            };
+
+            nextBtn.addEventListener('click', () => {
+                track.scrollBy({ left: getScrollAmount() / 2, behavior: 'smooth' }); // Scroll half view for smoother browsing
+            });
+
+            prevBtn.addEventListener('click', () => {
+                track.scrollBy({ left: -getScrollAmount() / 2, behavior: 'smooth' });
+            });
+        });
+    </script>
+
+    <!-- Shop by Category (New Recommendation) -->
+    <section class="section categories">
+        <div class="container">
+            <h2 class="section-title">Shop by Category</h2>
+            <div class="category-grid">
+                <a href="#" class="category-card">
+                    <div class="category-img-container">
+                        <!-- Using relevant product image as category representative -->
+                         <img src="https://nutraprofessional.com/cdn/shop/files/7B3A1319.png?v=1746712951&width=533" alt="Skin Care" style="height: 100%; width: auto; object-fit: contain;">
+                    </div>
+                    <h3>Skin Care</h3>
+                </a>
+                <a href="#" class="category-card">
+                    <div class="category-img-container">
+                        <img src="https://nutraprofessional.com/cdn/shop/files/7B3A1346.png?v=1746461340&width=533" alt="Hair Care" style="height: 100%; width: auto; object-fit: contain;">
+                    </div>
+                    <h3>Hair Care</h3>
+                </a>
+                <a href="#" class="category-card">
+                    <div class="category-img-container">
+                        <img src="https://nutraprofessional.com/cdn/shop/files/7B3A1309.png?v=1746471132&width=533" alt="Body Care" style="height: 100%; width: auto; object-fit: contain;">
+                    </div>
+                    <h3>Body Care</h3>
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Testimonials (New Recommendation) -->
+    <section class="section testimonials">
+        <div class="container">
+            <h2 class="section-title">What Our Customers Say</h2>
+            <div class="testimonial-grid">
+                <div class="testimonial-card">
+                    <div class="stars">★★★★★</div>
+                    <p class="testimonial-text">"Really effective for my oily skin. Loves it!"</p>
+                    <span class="author">- Mona A.</span>
+                </div>
+                <div class="testimonial-card">
+                    <div class="stars">★★★★★</div>
+                    <p class="testimonial-text">"The scent fits perfectly for summer nights."</p>
+                    <span class="author">- Sarah K.</span>
+                </div>
+                <div class="testimonial-card">
+                    <div class="stars">★★★★★</div>
+                    <p class="testimonial-text">"Fast delivery and great packaging."</p>
+                    <span class="author">- Ahmed M.</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Video Section -->
+    <section class="section video-section">
+        <div class="container">
+            <h2 class="section-title">Discover Our Routine</h2>
+            <div class="video-placeholder" style="background-image: url('https://nutraprofessional.com/cdn/shop/files/IMG-20240803-WA0015.jpg?v=1746480669&width=1600');">
+                <div class="play-button">
+                    <i class="fas fa-play"></i>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container footer-content">
+            <div class="footer-block">
+                <h4>Subscribe to our emails</h4>
+                <div class="newsletter-input">
+                    <input type="email" placeholder="Email">
+                    <button>➜</button>
+                </div>
+                <div class="social-icons">
+                    <a href="#"><i class="fab fa-facebook-f"></i></a>
+                    <a href="#"><i class="fab fa-instagram"></i></a>
+                    <a href="#"><i class="fab fa-tiktok"></i></a>
+                </div>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2024, NutraSoft. <a href="#">Privacy policy</a></p>
+        </div>
+    </footer>
+
+</body>
+</html>

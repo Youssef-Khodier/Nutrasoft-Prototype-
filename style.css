@@ -555,7 +555,11 @@ a {
     }
     
     .product-card {
-        min-width: calc(50% - 15px); /* Show 2 items on tablet */
+        min-width: calc(45% - 15px); /* Show ~2.2 items on tablet for peek effect */
+    }
+
+    .hero-title {
+        font-size: 3rem; /* Scale down hero title */
     }
 }
 
@@ -573,10 +577,34 @@ a {
     }
     
     .product-card {
-        min-width: 100%; /* Show 1 item on mobile */
+        min-width: 85%; /* Show 1 item with peek on mobile */
     }
-    
+
     .trust-grid {
         gap: 20px;
+        flex-direction: column; /* Stack trust items */
+        align-items: center;
+    }
+
+    .hero-title {
+        font-size: 2rem; /* Mobile hero title size */
+        text-align: center;
+    }
+
+    .section-title {
+        font-size: 1.8rem;
+    }
+    
+    .hero {
+        height: 400px; /* Reduce hero height */
+    }
+
+    .header-icons {
+        gap: 15px;
+        font-size: 1rem;
+    }
+
+    .logo-img {
+        max-height: 40px;
     }
 }
